@@ -1,0 +1,27 @@
+/* Navbar */
+.navbar {
+	max-height: 100px;
+	padding-left: 20px;
+	padding-top: 10px;
+	position: absolute;
+}
+
+.navbar img {
+	max-width: 40px;
+	max-height: 40px;
+	position: relative;
+	top: 3px;
+	left: 10px;
+}
+
+.navbar a {
+	text-decoration: none;
+	color: rgb(75, 75, 75);
+	font-family: "Aleo";
+	font-weight: 700;
+	font-size: 40px;
+}
+
+.navbar:hover {
+	cursor: pointer;
+}
