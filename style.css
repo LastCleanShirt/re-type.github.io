@@ -17,6 +17,10 @@ bg: rgb(75, 75, 75)
 	padding: 300px;
 	padding-top: 120px;
 	padding-bottom: 90px;
+	position: absolute;
+	width: 100%;
+	padding-left: 20%;
+	box-sizing: border-box;
 }
 
 .container {
@@ -93,27 +97,22 @@ bg: rgb(75, 75, 75)
 
 @keyframes wordOutIncorrect {
 	0% { 
-		background-color: rgb(75, 75, 75);
+		background-color: rgb(174, 42, 42);
+		color: white;
 		opacity: 1;
 	}
 
 	100% {
-		background-color: rgb(174, 42, 42);
 		opacity: 0;
 	}
 }
 
 @keyframes expanding {
-	0% {
-		padding: 300px;
-		padding-top: 120px;
-		padding-bottom: 90px;
-	}
+	0% {}
 
 	100% {
-		padding: 200px;
-		padding-top: 120px;
-		padding-bottom: 90px;
+		padding-left: 200px;
+		padding-right: 200px;
 	}
 }
 
