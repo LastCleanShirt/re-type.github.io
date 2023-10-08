@@ -11,15 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;500&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 
     <!-- Style imports -->
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/textbox.css">
-    <link rel="stylesheet" href="style.css">
 
     <title>Typing test prototype</title>
 </head>
 <body>
     <div class="navbar">
-        <a href="">Re-type<img src="./assets/enter-key.png" alt=""></a>
+        <a name="Name">Re-type<img src="./assets/enter-key.png" alt=""></a>
+        <a name="Settings" class="settings"><img src="assets/settings-gear.png" alt=""></a>
     </div>
     <div class="main-content">
         <div class="container timer">
@@ -33,5 +34,7 @@
     <!--  Scripts  -->
     <script src="./code.jquery.com_jquery-3.7.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.1.0/diff.min.js" integrity="sha512-vco9RAxEuv4PQ+iTQyuKElwoUOcsVdp+WgU6Lgo82ASpDfF7vI66LlWz+CZc2lMdn52tjjLOuHvy8BQJFp8a1A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>   
+    <script type="module" src="js/settingsButton.js"></script>
+    <script type="module" src="js/main.js"></script>
 </html>

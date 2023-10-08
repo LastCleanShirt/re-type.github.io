@@ -1,10 +1,32 @@
+:root {
+	--vl: #DDF8E8;
+	--l: #CDD5D1;
+	--m: #1C5253;
+	--red: #DA1B5B;
+}
+
 /* Navbar */
+
 .navbar {
 	max-height: 100px;
 	padding-left: 20px;
 	padding-top: 10px;
-	position: absolute;
+	width: 98%;
 }
+
+.settings {
+	position: absolute;
+	right: 0px;
+	text-align: center;	
+	transition: 100ms all ease-in-out; 
+	z-index: 99999;
+}
+
+.settings img:hover {
+	cursor:pointer !important;
+	width: 400px !important;
+}
+
 
 .navbar img {
 	max-width: 40px;
@@ -12,16 +34,29 @@
 	position: relative;
 	top: 3px;
 	left: 10px;
+	filter: invert(27%) sepia(7%) saturate(3081%) hue-rotate(132deg) brightness(35%) contrast(94%);
+	transition: all 0.4s ease-in-out;
 }
 
 .navbar a {
 	text-decoration: none;
-	color: rgb(75, 75, 75);
+	color: var(--m);
 	font-family: "Aleo";
 	font-weight: 700;
 	font-size: 40px;
 }
 
-.navbar:hover {
-	cursor: pointer;
+.buttonPressed {
+	animation: 0.5s buttonPressed ease-in-out;
 }
+
+
+@keyframes buttonPressed {
+	from {
+	}
+
+	to {
+		transform: rotateZ(180deg);
+	}
+}
+

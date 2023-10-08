@@ -1,92 +1,70 @@
+import { settings, setTheme } from "./settings.js"
+import { getEnglishText, getIndonesianText } from "./getWords.js"
+import { calculateAccuracy, calculateGrossWPM, calculateNetWPM } from "./calculate.js"
+
 $(() => {
+  console.log(`Hello there, congrats, you found an easter egg
+  Nadhira, if you  read these, i want you to know that i loved you, and this website is dedicated solely to you.`)
+  settings()
   /* 
-   * getText and generateText
-   * generate the random words
-   */
-
-  var letter = "a"
-  var words = []
-  var currentWordIndex = 0
-
-  let isTyping = false
-
-  function getIndonesianText() {
-    $.ajax({
-      url: "indonesian-words.txt",
-      dataType: "text",
-      success: function(data) {
-        var lines = data.split("\n")
-
-        var rangeMin = 1; // Minimum value for the range
-        var rangeMax = 200; // Maximum value for the range
-
-        // Define the desired distance between the two random numbers
-        var desiredDistance = 100;
-
-        // Generate the first random number within the defined range
-        var range1 = Math.floor(Math.random() * (rangeMax - rangeMin + 1)) + rangeMin;
-
-        // Generate the second random number based on the first number and desired distance
-        var range2 = range1 + desiredDistance;
-
+  * getText and generateText
+  * generate the random words
+  */
   
-
-        for (var i = range1; i < range2 && i < lines.length; i++) {
-          words.push(lines[i])
-        }
-
-      }, error: function (error) {
-        console.error("Error reading the file\n", error)
-      }
-    })
-  }
+  
+  
+  var currentWordIndex = 0
+  var numberOfLetters = 200
+  var words = []
+  
+  let isTyping = false
+  
+  
+  
   getText()
   
-  
-  function getEnglishText() {
-    $.get(`https://random-word-api.vercel.app/api?words=100&letter=${letter}`, (data) => {
-      words = data;
-      generateText(); // Call generateText() inside the callback
+  function getText() {
+    /*getIndonesianText(function(indonesianData) {
+      console.log(indonesianData); // Handle the Indonesian data here
+    });*/
+    
+    getEnglishText(function(englishData) {
+      words = englishData // Handle the English data here
+      
+      generateText()
       markWord()
     });
   }
-
-  function getText() {
-    getEnglishText()
-    generateText()
-    markWord()
-  }
-  
   function generateText() {
     console.log(words);
     $.each(words, (i, e) => {
       $(".text").append(`<p class="word" id="${i}">${e}</p>`);
     });
   }
-
   
-
-
+  
+  
+  
   /* Input mechanics
-   */
+  */
   const input = $("input");
   var inputValue = ""
-
-
-
+  
+  
+  
   /*
-   * countdown
-   */
-
+  * countdown
+  */
+  
   var countdown = 30
-
+  
   function updateCountdownDisplay() {
     $('#countdown').text(countdown);
   }
-
+  
   function startCountdown() { // reset the countdown time
     updateCountdownDisplay();
-
+    
     $('#countdown').addClass("fadeIn");
     $('#countdown').on("animationend", function () {
       $("#countdown").removeClass("fadeIn")
@@ -94,66 +72,53 @@ $(() => {
     var interval = setInterval(function() {
       countdown--;
       updateCountdownDisplay();
+      
+      if (countdown <= 0) {
+        clearInterval(interval);
+        $('#countdown').text("Countdown completed!");
+        var gwpm = calculateGrossWPM(correctWord, 0.5)
+        var accuracy = calculateAccuracy(correctWord, typedKeystrokes)
+        var nwpm = calculateNetWPM(correctWord, typedKeystrokes, 0.5)
         
-        if (countdown <= 0) {
-            clearInterval(interval);
-            $('#countdown').text("Countdown completed!");
-            var gwpm = calculateGrossWPM(correctWord, 0.5)
-            var accuracy = calculateAccuracy(correctWord, typedWord)
-            var nwpm = calculateNetWPM(correctWord, typedWord, 0.5)
-
-            console.log(`gross wpm is ${gwpm}`);
-            console.log(`net wpm is ${nwpm}`)
-            console.log(`accuracy is approximately ${accuracy}`)
-            console.log(`total correct words ${correctWord}`)
-            console.log(`total incorrect words ${inCorrectWord}`)
-
-            setTimeout(function(){
-              /*$('.main-content').css({
-                "animation": "0.8s fadeOut ease-in-out",
-                "animation-fill-mode": "forwards"
-              })*/
-              $("#countdown").text(`WPM ${nwpm}`)
-              
-            }, 1000)
-        }
+        console.log(`gross wpm is ${gwpm}`);
+        console.log(`net wpm is ${nwpm}`)
+        console.log(`accuracy is approximately ${accuracy}`)
+        console.log(`total correct words ${correctWord}`)
+        console.log(`total incorrect words ${inCorrectWord}`)
+        console.log(`total keystrokes ${typedKeystrokes}`)
+        
+        setTimeout(function(){
+          /*$('.main-content').css({
+            "animation": "0.8s fadeOut ease-in-out",
+            "animation-fill-mode": "forwards"
+          })*/
+          $("#countdown").text(`WPM ${gwpm}`)
+          
+        }, 1000)
+      }
     }, 1000); // update every second
   }   
-
+  
   // Handle each and every words
   var correctWord = 0;
   var inCorrectWord = 0;
   var typedWord = 0;
-
-  function calculateAccuracy(totalCorrectWords, totalTypedWords) {
-    const accuracy = (totalCorrectWords / totalTypedWords) * 100;
-    return accuracy;
-  }
+  var typedKeystrokes = 0;
   
-
-  function calculateGrossWPM(totalCorrectWords, timeInMinutes) {
-    const netWPM = totalCorrectWords / timeInMinutes;
-    return netWPM;
-  }
-
-  function calculateNetWPM(totalCorrectWords, totalTypedWords, timeInMinutes) {
-    const accuracy = (totalCorrectWords / totalTypedWords) * 100;
-    const wpmWithAccuracy = (totalCorrectWords / timeInMinutes) * (accuracy / 100);
-    return wpmWithAccuracy;
-  }
   
-
+  
+  
   function markWord(c) { // Handle word box animation
     console.log(currentWordIndex)
     if (currentWordIndex < 0) {  currentWordIndex = 0 }
     $(`#${currentWordIndex}`).removeClass("wordIn");
-
+    
     if (c == true) {
       $(`#${currentWordIndex}`).addClass("correctWord")
     } else {
       $(`#${currentWordIndex}`).addClass("incorrectWord")
     }
-
+    
     $(`#${currentWordIndex}`).on("animationend", function () {
       executeAfterAnimation(); // Call the function after the animation is complete
     });
@@ -164,12 +129,13 @@ $(() => {
     $(`#${currentWordIndex}`).remove();
     currentWordIndex++;
     $(`#${currentWordIndex}`).addClass("wordIn");
+    $(`#${currentWordIndex}`).addClass("currentWord");
     $('.text').animate({
       scrollTop: $(".text").offset().top - 200
     }, 100);
     //console.log(currentWordIndex)
   }
-
+  
   input.keydown((e) => {
     if (!isTyping) {
       startCountdown();
@@ -182,7 +148,7 @@ $(() => {
     if (e.which === 32) {
       e.preventDefault(); // Prevent the default space key behavior
       if (input.val() != "") {
-  
+        
         var same = false;
         if (input.val() == words[currentWordIndex]) {
           same = true;
@@ -191,16 +157,17 @@ $(() => {
           same = false;
           inCorrectWord++;
         }
+        typedKeystrokes += input.val().length
         typedWord++;
-  
+        
         markWord(same); // Call markWord after the user has pressed spacebar
         input.val("");   // Clear the input value
-
+        
         console.log(correctWord)
       }
     }
   });
-
-
-
+  
+  
+  
 })

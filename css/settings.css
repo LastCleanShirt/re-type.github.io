@@ -1,0 +1,25 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    animation: 1s bgFadeIn ease-in-out;
+}
+
+body {
+    overflow-y: hidden;
+}
+
+.main-content {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+}
+
+@keyframes bgFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
