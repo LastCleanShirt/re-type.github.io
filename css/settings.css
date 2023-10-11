@@ -1,3 +1,11 @@
+:root {
+    --vl: #DDF8E8;
+    --l: #CDD5D1;
+    --sm: #759492;
+    --m: #1C5253;
+    --red: #DA1B5B;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -9,16 +17,66 @@ body {
 }
 
 .main-content {
-    width: 100%;
+    width: 60%;
     height: 100vh;
-    padding: 0;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    right: 20%;
+    text-align: center;
+    
+}
+
+.container h1 {
+    margin: 40px;
+}
+
+.container select {
+    margin: 20px;
+}
+
+.container {
+    flex: 1;
+}
+
+.right-side {
+    text-align: right;
+}
+
+.left-side {
+    text-align: left;
+}
+
+h1 {
+    font-family: 'Aleo';
+    color: var(--m);
+    font-size: 35px;
+}
+
+select {
+    border: 2px solid var(--sm);
+    border-radius: 10px;
+    padding: 5px;
+    text-decoration: none;
+    font-family: 'Quicksand';
+    font-size: 30px;
+    color: var(--m);
+}
+
+/* 
+* blur fx for title
+*/
+.blurry-text {
+    filter: blur(3px);
 }
 
 @keyframes bgFadeIn {
     from {
         opacity: 0;
     }
-
+    
     to {
         opacity: 1;
     }

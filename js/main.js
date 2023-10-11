@@ -19,21 +19,32 @@ $(() => {
   
   let isTyping = false
   
-  
+  /*
+   * Cookies and data
+   */
+  const theme = Cookies.get("theme");
+  const language = Cookies.get("lang")
+
   
   getText()
   
   function getText() {
-    /*getIndonesianText(function(indonesianData) {
-      console.log(indonesianData); // Handle the Indonesian data here
-    });*/
+    if (language === "id") {
+      getIndonesianText(function(indonesianData) {// Handle the Indonesian data here
+        words = indonesianData;
+        generateText()
+        markWord()
+      });
+    } else if (language === "en") {
+      getEnglishText(function(englishData) {
+        words = englishData // Handle the English data here
+        
+        generateText()
+        markWord()
+      });
+    }
     
-    getEnglishText(function(englishData) {
-      words = englishData // Handle the English data here
-      
-      generateText()
-      markWord()
-    });
+
   }
   function generateText() {
     console.log(words);
