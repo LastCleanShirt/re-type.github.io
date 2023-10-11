@@ -34,6 +34,7 @@ $(() => {
         words = indonesianData;
         generateText()
         markWord()
+        $("#countdown").text("Ketik untuk memulai")
       });
     } else if (language === "en") {
       getEnglishText(function(englishData) {

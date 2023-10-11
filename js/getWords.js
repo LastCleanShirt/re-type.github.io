@@ -9,7 +9,7 @@ function getIndonesianText(callback) {
             var data = [];
 
             var rangeMin = 1; // Minimum value for the range
-            var rangeMax = 200; // Maximum value for the range
+            var rangeMax = 10000; // Maximum value for the range
 
             // Define the desired distance between the two random numbers
             var desiredDistance = 100;
