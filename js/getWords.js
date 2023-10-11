@@ -34,7 +34,10 @@ function getIndonesianText(callback) {
 }
 
 function getEnglishText(callback) {
-    $.get(`https://random-word-api.vercel.app/api?words=200&letter=${letter}`, (data) => {
+    var randomCharCode = Math.floor(Math.random() * (122 - 97 + 1)) + 97;
+    var randomCharacter = String.fromCharCode(randomCharCode);
+    console.log(randomCharacter)
+    $.get(`https://random-word-api.vercel.app/api?words=200&letter=${randomCharacter}`, (data) => {
         // Call the callback function with the data
         callback(data);
     });

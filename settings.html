@@ -19,27 +19,18 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="index.html" name="Name" class="en-lang-inline">Settings</a>
         <a href="index.html" name="Name" class="id-lang-inline">Pengaturan</a>
         <img src="./assets/enter-key.png" alt="" style="display: inline-block;">
     </div>
     <div class="main-content">
         <div class="left-side container">
-            <h1 class="id-lang">Tema:</h1>
-            <h1 class="en-lang">Theme:</h1>
-            
-            <h1 class="en-lang">Language:</h1>
-            <h1 class="id-lang">Bahasa:</h1>
+            <h1>Language:</h1>
         </div>
         <div class="custom-select right-side container" style="width:200px;">
-            <select>
-                <option value="0">Dark</option>
-                <option value="1">Light</option>
-            </select>
             <br>
-            <select>
-                <option value="0">Bahasa Indonesia</option>
-                <option value="1">English</option>
+            <select id="language">
+                <option value="0" class="id-select">Bahasa Indonesia</option>
+                <option value="1" class="en-select">English</option>
             </select>
     </div>
 </body>
